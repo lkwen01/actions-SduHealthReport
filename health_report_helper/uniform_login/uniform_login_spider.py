@@ -30,7 +30,11 @@ def login(username, password, to_url):
             headers=HEADERS_LOGIN,
             data=data
         )
-        JSESSIONID = re.findall('<Cookie JSESSIONID=(.*?) for', str(response.request._cookies._cookies['pass.sdu.edu.cn']['/']['JSESSIONID']))[0]
+        try:
+            JSESSIONID = re.findall('<Cookie JSESSIONID=(.*?) for', str(response.request._cookies._cookies['pass.sdu.edu.cn']['/']['JSESSIONID']))[0]
+        except:
+            JSESSIONID = re.findall('<Cookie JSESSIONID=(.*?) for',
+                                    str(response.request._cookies._cookies['pass.sdu.edu.cn']['/cas']['JSESSIONID']))[0]
         return JSESSIONID
     except execution as e:
         print(e)
