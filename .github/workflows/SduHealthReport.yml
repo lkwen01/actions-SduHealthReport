@@ -5,7 +5,7 @@ on:
   #   branches:
   #     - master
   schedule:
-    - cron: '30 2 * * *' # GMT+8 10:30
+    - cron: "30 2 * * *" # GMT+8 10:30
   workflow_dispatch: # add manually button
 
 jobs:
@@ -21,12 +21,13 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      
+
       - name: Run Spider
         run: |
           python health_report_helper/main.py "${{ secrets.DATA }}"
+          python health_report_helper/main.py "${{ secrets.DATA2 }}"
