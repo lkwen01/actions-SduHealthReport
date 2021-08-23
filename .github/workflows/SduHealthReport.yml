@@ -6,6 +6,7 @@ on:
   #     - master
   schedule:
     - cron: '20 5 * * *' # GMT+8 10:30
+  workflow_dispatch:
 
 jobs:
   start:
