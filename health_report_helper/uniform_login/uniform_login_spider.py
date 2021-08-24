@@ -28,8 +28,7 @@ def login(username, password, to_url):
         response = requests.post(
             url=url,
             headers=HEADERS_LOGIN,
-            data=data,
-            verify=False
+            data=data
         )
         try:
             return re.findall('<Cookie JSESSIONID=(.*?) for',
@@ -47,8 +46,7 @@ def getLoginCasData(url):
     try:
         response = requests.get(
             url=url,
-            headers=HEADERS_LOGIN,
-            verify=False
+            headers=HEADERS_LOGIN
         )
         if response.status_code == 200:
             lt = re.findall('name="lt" value="(.*?)"', response.text)[0]
