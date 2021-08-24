@@ -14,7 +14,7 @@ import time
 if __name__ == '__main__':
     config.data = json.loads(re.sub('#(.*)\n', '\n', sys.argv[1]).replace("'", '"'))
     JSESSIONID = "0"
-    while len(JSESSIONID) != 63:
+    while len(JSESSIONID) < 63:
         JSESSIONID=login(config.data['username'], config.data['password'], 'https://scenter.sdu.edu.cn/tp_fp/view?m=fp')
         time.sleep(5)
     spider.report(JSESSIONID)
