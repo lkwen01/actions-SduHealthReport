@@ -28,14 +28,15 @@ def login(username, password, to_url):
         response = requests.post(
             url=url,
             headers=HEADERS_LOGIN,
-            data=data
+            data=data,
+            verify=False
         )
         try:
-            JSESSIONID = re.findall('<Cookie JSESSIONID=(.*?) for', str(response.request._cookies._cookies['pass.sdu.edu.cn']['/']['JSESSIONID']))[0]
+            return re.findall('<Cookie JSESSIONID=(.*?) for',
+                       str(response.request._cookies._cookies['pass.sdu.edu.cn']['/']['JSESSIONID']))[0]
         except:
-            JSESSIONID = re.findall('<Cookie JSESSIONID=(.*?) for',
-                                    str(response.request._cookies._cookies['pass.sdu.edu.cn']['/cas']['JSESSIONID']))[0]
-        return JSESSIONID
+            return re.findall('<Cookie JSESSIONID=(.*?) for',
+                       str(response.request._cookies._cookies['pass.sdu.edu.cn']['/cas']['JSESSIONID']))[0]
     except execution as e:
         print(e)
         exit(-1)
@@ -46,7 +47,8 @@ def getLoginCasData(url):
     try:
         response = requests.get(
             url=url,
-            headers=HEADERS_LOGIN
+            headers=HEADERS_LOGIN,
+            verify=False
         )
         if response.status_code == 200:
             lt = re.findall('name="lt" value="(.*?)"', response.text)[0]
