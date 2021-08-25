@@ -17,6 +17,7 @@ def report(JSESSIONID):
             headers=config.HEADERS,
             data=config.get_DATA().encode('utf-8')
         )
+        print(response.text)
         if response.status_code != 200:
             return False
         print('========= report SUCCESS =========')
