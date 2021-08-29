@@ -56,7 +56,8 @@ def getLoginCasData(url):
             return lt, execution, _eventId, JSESSIONID
     except Exception as e:
         print(e)
-        exit(-1)
+        lt, execution, _eventId, JSESSIONID = getLoginCasData(url)
+        return lt, execution, _eventId, JSESSIONID
 
 
 HEADERS_LOGIN = {
